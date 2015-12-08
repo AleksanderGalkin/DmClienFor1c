@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:xsd1="http://www.sample-package.org/DrillHole" xmlns:xsd2="http://www.sample-package.org" xmlns:soapbind="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12bind="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.sample-package.org" name="GetDH" targetNamespace="http://www.sample-package.org" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xs:schema xmlns:tns="http://www.sample-package.org/DrillHole" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.sample-package.org/DrillHole" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="Assay">
+        <xs:sequence>
+          <xs:element name="BHID" type="xs:string" />
+          <xs:element name="Sample" type="xs:string" />
+          <xs:element name="From" type="xs:decimal" />
+          <xs:element name="To" type="xs:decimal" />
+          <xs:element name="Length" type="xs:decimal" />
+          <xs:element name="Ves" type="xs:decimal" />
+          <xs:element name="GC_Au" type="xs:decimal" />
+          <xs:element name="Blank" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Collar">
+        <xs:sequence>
+          <xs:element name="BHID" type="xs:string" />
+          <xs:element name="Bench" type="xs:int" />
+          <xs:element name="Blast" type="xs:string" />
+          <xs:element name="Hole" type="xs:int" />
+          <xs:element name="XCollar" type="xs:decimal" />
+          <xs:element name="YCollar" type="xs:decimal" />
+          <xs:element name="ZCollar" type="xs:decimal" />
+          <xs:element name="Depth" type="xs:decimal" />
+          <xs:element name="Driller" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs2="http://www.sample-package.org" xmlns:xs1="http://www.sample-package.org/DrillHole" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.sample-package.org" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://www.sample-package.org/DrillHole" />
+      <xs:complexType name="ListAssays">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Assays" type="xs1:Assay" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ListCollars">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Collars" type="xs1:Collar" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="GetCollars">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetCollarsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" nillable="true" type="xs2:ListCollars" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetAssays">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetAssaysResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" nillable="true" type="xs2:ListAssays" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </types>
+  <message name="GetCollarsRequestMessage">
+    <part name="parameters" element="tns:GetCollars" />
+  </message>
+  <message name="GetCollarsResponseMessage">
+    <part name="parameters" element="tns:GetCollarsResponse" />
+  </message>
+  <message name="GetAssaysRequestMessage">
+    <part name="parameters" element="tns:GetAssays" />
+  </message>
+  <message name="GetAssaysResponseMessage">
+    <part name="parameters" element="tns:GetAssaysResponse" />
+  </message>
+  <portType name="GetDHPortType">
+    <operation name="GetCollars">
+      <input message="tns:GetCollarsRequestMessage" />
+      <output message="tns:GetCollarsResponseMessage" />
+    </operation>
+    <operation name="GetAssays">
+      <input message="tns:GetAssaysRequestMessage" />
+      <output message="tns:GetAssaysResponseMessage" />
+    </operation>
+  </portType>
+  <binding name="GetDHSoapBinding" type="tns:GetDHPortType">
+    <soapbind:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="GetCollars">
+      <soapbind:operation soapAction="http://www.sample-package.org#GetDH:GetCollars" style="document" />
+      <input>
+        <soapbind:body use="literal" />
+      </input>
+      <output>
+        <soapbind:body use="literal" />
+      </output>
+    </operation>
+    <operation name="GetAssays">
+      <soapbind:operation soapAction="http://www.sample-package.org#GetDH:GetAssays" style="document" />
+      <input>
+        <soapbind:body use="literal" />
+      </input>
+      <output>
+        <soapbind:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <binding name="GetDHSoap12Binding" type="tns:GetDHPortType">
+    <soap12bind:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="GetCollars">
+      <soap12bind:operation soapAction="http://www.sample-package.org#GetDH:GetCollars" style="document" />
+      <input>
+        <soap12bind:body use="literal" />
+      </input>
+      <output>
+        <soap12bind:body use="literal" />
+      </output>
+    </operation>
+    <operation name="GetAssays">
+      <soap12bind:operation soapAction="http://www.sample-package.org#GetDH:GetAssays" style="document" />
+      <input>
+        <soap12bind:body use="literal" />
+      </input>
+      <output>
+        <soap12bind:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="GetDH">
+    <port name="GetDHSoap" binding="tns:GetDHSoapBinding">
+      <documentation>
+        <wsi:Claim xmlns:wsi="http://ws-i.org/schemas/conformanceClaim/" conformsTo="http://ws-i.org/profiles/basic/1.1" />
+      </documentation>
+      <soapbind:address location="http://localhost/1c_test/ws/GetDh" />
+    </port>
+    <port name="GetDHSoap12" binding="tns:GetDHSoap12Binding">
+      <soap12bind:address location="http://localhost/1c_test/ws/GetDh" />
+    </port>
+  </service>
+</definitions>
